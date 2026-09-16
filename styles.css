@@ -1,5 +1,5 @@
 ﻿/* ============================================================
-   AUTHOR VENTURE — DESIGN SYSTEM
+   AUTHOR VENTURE: DESIGN SYSTEM
    Navy + gold, editorial serif display, disciplined spacing.
    Signature device: the gold path (from the logo mark).
    ============================================================ */
@@ -25,12 +25,12 @@
   --serif:"Fraunces",Georgia,"Times New Roman",serif;
   --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 
-  --step--1:clamp(.78rem,.76rem + .1vw,.84rem);
-  --step-0:clamp(1rem,.97rem + .16vw,1.06rem);
-  --step-1:clamp(1.15rem,1.08rem + .35vw,1.35rem);
-  --step-2:clamp(1.45rem,1.3rem + .75vw,2rem);
-  --step-3:clamp(1.9rem,1.6rem + 1.5vw,2.9rem);
-  --step-4:clamp(2.4rem,1.8rem + 3vw,4.4rem);
+  --step--1:clamp(.82rem,.8rem + .1vw,.88rem);
+  --step-0:clamp(1.06rem,1.02rem + .2vw,1.16rem);
+  --step-1:clamp(1.22rem,1.14rem + .4vw,1.45rem);
+  --step-2:clamp(1.55rem,1.38rem + .85vw,2.2rem);
+  --step-3:clamp(2rem,1.65rem + 1.7vw,3.2rem);
+  --step-4:clamp(2.5rem,1.85rem + 3.3vw,4.9rem);
 
   --pad:clamp(1.25rem,5vw,4rem);
   --maxw:1200px;
@@ -60,8 +60,16 @@ h1,h2,h3,h4{
   line-height:1.08;
   letter-spacing:-.015em;
   margin:0;
+  text-wrap:balance;
   font-variation-settings:"SOFT" 0,"WONK" 0,"opsz" 40;
 }
+/* Fraunces carries a 9-144 optical size axis; matching it to the rendered
+   size is what stops big display type looking like scaled-up body type */
+h1{font-variation-settings:"SOFT" 0,"WONK" 0,"opsz" 120}
+h2{font-variation-settings:"SOFT" 0,"WONK" 0,"opsz" 72}
+h3{font-variation-settings:"SOFT" 0,"WONK" 0,"opsz" 40}
+h4{font-variation-settings:"SOFT" 0,"WONK" 0,"opsz" 28}
+p,li,dd{text-wrap:pretty}
 h1{font-size:var(--step-4)}
 h2{font-size:var(--step-3)}
 h3{font-size:var(--step-2)}
@@ -92,7 +100,7 @@ p{margin:0}
 .lede{
   font-size:var(--step-1);
   color:var(--ink-70);
-  line-height:1.55;
+  line-height:1.5;
   max-width:52ch;
 }
 .muted{color:var(--ink-70)}
@@ -102,7 +110,7 @@ p{margin:0}
   display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
   padding:.95rem 1.6rem;
   border-radius:var(--r);
-  font-size:.94rem;font-weight:600;letter-spacing:.01em;
+  font-size:1rem;font-weight:600;letter-spacing:.01em;
   text-decoration:none;border:1px solid transparent;
   transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease);
 }
@@ -116,7 +124,7 @@ p{margin:0}
 
 .link-arrow{
   display:inline-flex;align-items:center;gap:.5rem;
-  font-weight:600;font-size:.9rem;text-decoration:none;color:var(--navy-900);
+  font-weight:600;font-size:.97rem;text-decoration:none;color:var(--navy-900);
   border-bottom:1px solid var(--line-gold);padding-bottom:.2rem;
   transition:gap .3s var(--ease),border-color .3s var(--ease);
 }
@@ -143,7 +151,7 @@ p{margin:0}
 
 .nav{display:flex;align-items:center;gap:2rem}
 .nav a{
-  text-decoration:none;font-size:.92rem;font-weight:500;color:var(--navy-900);
+  text-decoration:none;font-size:.99rem;font-weight:500;color:var(--navy-900);
   position:relative;padding-block:.35rem;
 }
 .nav a::after{
@@ -155,7 +163,7 @@ p{margin:0}
 
 .header-actions{display:flex;align-items:center;gap:1.25rem}
 .header-phone{
-  text-decoration:none;font-size:.9rem;font-weight:600;display:flex;align-items:center;gap:.45rem;
+  text-decoration:none;font-size:.97rem;font-weight:600;display:flex;align-items:center;gap:.45rem;
 }
 .header-phone svg{width:15px;height:15px;color:var(--gold-600)}
 
@@ -184,12 +192,12 @@ p{margin:0}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
 .hero h1 .line{display:block;overflow:hidden}
 .hero h1 .line > span{display:block}
-.hero h1 em{font-style:italic;color:var(--gold-600);font-variation-settings:"WONK" 1}
+.hero h1 em{font-style:italic;color:var(--gold-600);font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 120}
 .hero-lede{margin-top:1.6rem;max-width:46ch}
 .hero-cta{display:flex;flex-wrap:wrap;gap:.85rem;margin-top:2.2rem}
 .hero-meta{
   margin-top:2.6rem;padding-top:1.4rem;border-top:1px solid var(--line);
-  display:flex;flex-wrap:wrap;gap:1.6rem;font-size:.85rem;color:var(--ink-70);
+  display:flex;flex-wrap:wrap;gap:1.6rem;font-size:.92rem;color:var(--ink-70);
 }
 .hero-meta span{display:flex;align-items:center;gap:.5rem}
 .hero-meta span::before{content:"";width:5px;height:5px;background:var(--gold-500);border-radius:50%;flex:none}
@@ -225,7 +233,7 @@ p{margin:0}
 /* ---------- trust strip ---------- */
 .trust{border-block:1px solid var(--line);background:var(--cream-100)}
 .trust-inner{display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;padding-block:1.6rem}
-.trust p{font-size:.82rem;letter-spacing:.03em;color:var(--ink-70);max-width:26ch}
+.trust p{font-size:.88rem;letter-spacing:.03em;color:var(--ink-70);max-width:26ch}
 .trust ul{list-style:none;display:flex;flex-wrap:wrap;gap:clamp(1.2rem,3vw,2.6rem);margin:0;padding:0}
 .trust li{
   font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--navy-900);opacity:.62;
@@ -254,7 +262,7 @@ p{margin:0}
 .svc-card:hover::before{transform:scaleY(1)}
 .svc-num{font-size:.72rem;letter-spacing:.18em;color:var(--gold-600);font-weight:600}
 .svc-card h3{font-size:var(--step-2)}
-.svc-card p{color:var(--ink-70);font-size:.95rem}
+.svc-card p{color:var(--ink-70);font-size:1.01rem}
 .svc-card .link-arrow{margin-top:auto;align-self:flex-start}
 .svc-icon{width:34px;height:34px;color:var(--navy-900);opacity:.85}
 
@@ -278,14 +286,14 @@ p{margin:0}
   font-family:var(--sans);
 }
 .step-body h3{font-size:var(--step-1);margin-bottom:.5rem}
-.step-body p{color:rgba(251,248,243,.68);font-size:.94rem;max-width:38ch}
+.step-body p{color:rgba(251,248,243,.68);font-size:1rem;max-width:38ch}
 .step:nth-child(odd) .step-body p{margin-left:auto}
 
 /* ---------- why / value props ---------- */
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,2.5rem)}
 .why-item{padding-top:1.6rem;border-top:1px solid var(--navy-900)}
 .why-item h3{font-size:var(--step-1);margin-bottom:.7rem}
-.why-item p{color:var(--ink-70);font-size:.94rem}
+.why-item p{color:var(--ink-70);font-size:1rem}
 
 /* ---------- portfolio ---------- */
 .pf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.2rem,3vw,2.2rem)}
@@ -302,7 +310,7 @@ p{margin:0}
 .filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.5rem}
 .filter{
   background:transparent;border:1px solid var(--line);border-radius:100px;
-  padding:.5rem 1.1rem;font-size:.85rem;color:var(--ink-70);
+  padding:.5rem 1.1rem;font-size:.92rem;color:var(--ink-70);
   transition:border-color .3s var(--ease),color .3s var(--ease),background .3s var(--ease);
 }
 .filter:hover{border-color:var(--navy-900);color:var(--navy-900)}
@@ -316,8 +324,8 @@ p{margin:0}
 }
 .quote-card blockquote{margin:0;font-family:var(--serif);font-size:1.1rem;line-height:1.4}
 .quote-card .q-mark{font-family:var(--serif);font-size:2.6rem;line-height:.6;color:var(--gold-300)}
-.q-author{margin-top:auto;font-size:.82rem;color:var(--ink-50);border-top:1px solid var(--line);padding-top:1rem}
-.q-author strong{display:block;color:var(--navy-900);font-size:.92rem;font-weight:600}
+.q-author{margin-top:auto;font-size:.88rem;color:var(--ink-50);border-top:1px solid var(--line);padding-top:1rem}
+.q-author strong{display:block;color:var(--navy-900);font-size:.99rem;font-weight:600}
 .placeholder-tag{
   display:inline-block;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
   background:var(--gold-200);color:var(--gold-600);padding:.25rem .55rem;border-radius:2px;font-weight:700;
@@ -350,6 +358,17 @@ p{margin:0}
   left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;
 }
 
+/* ---------- the outcome, closing the process path ---------- */
+.process-end{margin:clamp(3rem,6vw,4.5rem) auto 0;max-width:430px;text-align:center}
+.process-end img{
+  width:100%;height:auto;border-radius:3px;
+  box-shadow:0 30px 70px -34px rgba(0,0,0,.7);
+}
+.process-end figcaption{
+  margin-top:1.1rem;font-size:.74rem;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gold-300);
+}
+
 /* ---------- page hero (interior) ---------- */
 .page-hero{padding-top:clamp(7.5rem,14vw,10rem);padding-bottom:clamp(2.5rem,5vw,4rem)}
 .page-hero h1{max-width:16ch}
@@ -372,7 +391,7 @@ p{margin:0}
 .hpanel-num{font-family:var(--serif);font-size:clamp(4rem,10vw,8rem);line-height:1;color:var(--gold-200)}
 .hpanel h2{margin-block:.6rem 1.2rem}
 .hpanel ul{list-style:none;margin:1.6rem 0 0;padding:0;display:grid;gap:.7rem}
-.hpanel li{display:flex;gap:.7rem;font-size:.94rem;color:var(--ink-70)}
+.hpanel li{display:flex;gap:.7rem;font-size:1rem;color:var(--ink-70)}
 .hpanel li::before{content:"";width:6px;height:6px;margin-top:.55rem;background:var(--gold-500);flex:none}
 
 /* ---------- packages ---------- */
@@ -380,9 +399,9 @@ p{margin:0}
 .pkg{background:var(--cream-50);padding:clamp(1.8rem,3vw,2.4rem);display:flex;flex-direction:column;gap:1.1rem}
 .pkg--featured{background:var(--white)}
 .pkg-name{font-family:var(--serif);font-size:var(--step-2)}
-.pkg-price{font-size:.9rem;color:var(--ink-50)}
+.pkg-price{font-size:.97rem;color:var(--ink-50)}
 .pkg-price strong{display:block;font-family:var(--serif);font-size:2rem;color:var(--navy-900);font-weight:600}
-.pkg ul{list-style:none;margin:0;padding:0;display:grid;gap:.6rem;font-size:.9rem;color:var(--ink-70)}
+.pkg ul{list-style:none;margin:0;padding:0;display:grid;gap:.6rem;font-size:.97rem;color:var(--ink-70)}
 .pkg li{display:flex;gap:.6rem}
 .pkg li svg{width:15px;height:15px;color:var(--gold-600);flex:none;margin-top:.35rem}
 .pkg .btn{margin-top:auto}
@@ -392,11 +411,11 @@ p{margin:0}
 .split--wide-left{grid-template-columns:1.15fr .85fr}
 .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2.5rem}
 .stat strong{display:block;font-family:var(--serif);font-size:var(--step-3);color:var(--navy-900);font-weight:600}
-.stat span{font-size:.82rem;color:var(--ink-50);letter-spacing:.04em}
+.stat span{font-size:.88rem;color:var(--ink-50);letter-spacing:.04em}
 .values{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
 .value{background:var(--cream-50);padding:clamp(1.6rem,3vw,2.4rem)}
 .value h3{font-size:var(--step-1);margin-bottom:.6rem}
-.value p{color:var(--ink-70);font-size:.94rem}
+.value p{color:var(--ink-70);font-size:1rem}
 .value-k{font-size:.72rem;letter-spacing:.18em;color:var(--gold-600);font-weight:600;display:block;margin-bottom:.8rem}
 
 /* ---------- contact ---------- */
@@ -406,7 +425,7 @@ p{margin:0}
 .field label{font-size:.8rem;font-weight:600;letter-spacing:.04em}
 .field .req{color:var(--gold-600)}
 .field input,.field select,.field textarea{
-  font:inherit;font-size:.95rem;padding:.85rem .95rem;
+  font:inherit;font-size:1.01rem;padding:.85rem .95rem;
   border:1px solid var(--line);border-radius:var(--r);background:var(--white);color:var(--ink);
   transition:border-color .3s var(--ease),box-shadow .3s var(--ease);
 }
@@ -450,13 +469,13 @@ p{margin:0}
 .site-footer{background:var(--navy-900);color:rgba(251,248,243,.72);padding-block:clamp(3.5rem,7vw,5.5rem) 2rem}
 .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:clamp(1.8rem,4vw,3rem)}
 .footer-brand img{height:78px;width:auto;filter:brightness(0) invert(1);opacity:.95;margin-bottom:1.2rem}
-.footer-brand p{font-size:.88rem;max-width:34ch}
+.footer-brand p{font-size:.95rem;max-width:34ch}
 .site-footer h4{
   font-family:var(--sans);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;
   color:var(--gold-300);margin-bottom:1.1rem;font-weight:600;
 }
 .site-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
-.site-footer a{text-decoration:none;font-size:.9rem;transition:color .3s var(--ease)}
+.site-footer a{text-decoration:none;font-size:.97rem;transition:color .3s var(--ease)}
 .site-footer a:hover{color:var(--gold-300)}
 .footer-bottom{
   margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.6rem;border-top:1px solid rgba(251,248,243,.14);
@@ -511,7 +530,7 @@ p{margin:0}
 .svc-panel{background:var(--white);border:1px solid var(--line);padding:clamp(1.6rem,3vw,2.4rem)}
 .svc-panel h3{font-size:var(--step-1)}
 .ticks{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.7rem}
-.ticks li{display:flex;gap:.7rem;font-size:.94rem;color:var(--ink-70);line-height:1.5}
+.ticks li{display:flex;gap:.7rem;font-size:1rem;color:var(--ink-70);line-height:1.5}
 .ticks li::before{
   content:"";width:7px;height:7px;margin-top:.5rem;flex:none;
   background:var(--gold-500);transform:rotate(45deg);
@@ -526,10 +545,10 @@ p{margin:0}
 .edit-levels{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
 .edit-level{background:var(--cream-50);padding:clamp(1.6rem,3vw,2.4rem);display:flex;flex-direction:column;gap:.7rem}
 .edit-level h3{font-size:var(--step-1)}
-.edit-level p{font-size:.94rem;color:var(--ink-70)}
+.edit-level p{font-size:1rem;color:var(--ink-70)}
 .lvl-when{
   margin-top:auto;padding-top:1rem;border-top:1px solid var(--line);
-  font-size:.85rem;color:var(--gold-600);font-weight:600;
+  font-size:.92rem;color:var(--gold-600);font-weight:600;
 }
 
 /* --- decision block --- */
@@ -547,17 +566,17 @@ p{margin:0}
   display:grid;gap:.25rem;padding-bottom:1rem;border-bottom:1px solid rgba(251,248,243,.14);
 }
 .decider-list strong{font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--cream-50)}
-.decider-list span{font-size:.9rem;color:var(--gold-300)}
+.decider-list span{font-size:.97rem;color:var(--gold-300)}
 
 /* --- children's age bands --- */
 .age-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
 .age-card{background:var(--cream-50);padding:clamp(1.4rem,2.5vw,2rem);display:flex;flex-direction:column;gap:.6rem}
 .age-card h3{font-size:1.15rem}
-.age-card p{font-size:.9rem;color:var(--ink-70)}
+.age-card p{font-size:.97rem;color:var(--ink-70)}
 .style-chips{display:flex;flex-wrap:wrap;gap:.5rem}
 .style-chips span{
   border:1px solid var(--line-gold);border-radius:100px;padding:.45rem 1rem;
-  font-size:.85rem;color:var(--ink-70);background:var(--cream-50);
+  font-size:.92rem;color:var(--ink-70);background:var(--cream-50);
 }
 
 /* --- portfolio shelf (horizontal) --- */
@@ -576,13 +595,13 @@ p{margin:0}
 .case-stats{list-style:none;margin:0;padding:0;display:grid;gap:1.4rem}
 .case-stats li{border-left:2px solid var(--gold-500);padding-left:1.2rem}
 .case-stats strong{display:block;font-family:var(--serif);font-size:var(--step-2);font-weight:600}
-.case-stats span{font-size:.84rem;color:var(--ink-50)}
+.case-stats span{font-size:.9rem;color:var(--ink-50)}
 
 /* --- team --- */
 .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1.2rem,3vw,2rem)}
 .team-card{display:flex;flex-direction:column;gap:.5rem}
 .team-card h3{font-size:1.1rem;margin-top:.6rem}
-.team-card p{font-size:.88rem;color:var(--ink-70)}
+.team-card p{font-size:.95rem;color:var(--ink-70)}
 .team-role{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-600);font-weight:600}
 .team-photo{
   aspect-ratio:3/4;background:linear-gradient(155deg,var(--navy-700),var(--navy-900));
@@ -603,7 +622,7 @@ p{margin:0}
 }
 
 /* ============================================================
-   V2 — TEXTURE, ILLUSTRATION, INSTRUMENTS
+   V2: TEXTURE, ILLUSTRATION, INSTRUMENTS
    The vernacular of publishing: proof marks, folios, gutters,
    spine widths, trim sizes, deckled edges.
    ============================================================ */
@@ -615,7 +634,7 @@ body{
   background-attachment:fixed;
 }
 
-/* reading progress — a bookmark ribbon along the top */
+/* reading progress: a bookmark ribbon along the top */
 .progress{
   position:fixed;top:0;left:0;height:2px;width:100%;z-index:70;
   background:var(--gold-500);transform:scaleX(0);transform-origin:left;
@@ -648,12 +667,22 @@ body{
 /* ---------- hero spread illustration ---------- */
 .spread-wrap{position:relative;perspective:1600px}
 .spread{width:100%;height:auto;overflow:visible}
-.spread .pg-draft-line{stroke:var(--navy-900);stroke-width:2.6;stroke-linecap:round;opacity:.5}
-.spread .pg-strike{stroke:var(--proof-red);stroke-width:2.2;stroke-linecap:round}
+.spread .pg-draft-line{stroke:var(--navy-900);stroke-width:2.6;fill:none;stroke-linecap:round;opacity:.5}
+.spread .pg-strike{stroke:var(--proof-red);stroke-width:2.2;fill:none;stroke-linecap:round}
 .spread .pg-mark{stroke:var(--proof-red);stroke-width:1.8;fill:none;stroke-linecap:round}
 .spread .pg-set-line{fill:var(--navy-900);opacity:.72}
 .spread .pg-paper{fill:#FFFDF8}
-.spread .pg-edge{fill:#EFE7D8}
+.spread .pg-edge{fill:#003153}
+/* hidden by default so a no-JS or reduced-motion visitor gets the open
+   spread rather than a board sitting over the page */
+.spread .pg-cover{opacity:0}
+.spread .pg-cover-board{fill:#003153}
+.spread .pg-cover-rule{fill:none;stroke:var(--gold-300);stroke-width:1;opacity:.42}
+.spread .pg-cover-title{fill:var(--gold-200);opacity:.92}
+.spread .pg-cover-author{fill:var(--gold-300);opacity:.7}
+.spread .pg-cover-dash{fill:var(--gold-300);opacity:.6}
+.spread .pg-cover-foot{fill:none;stroke:var(--gold-300);stroke-width:1;opacity:.5}
+.spread .pg-cover-dia{fill:var(--gold-300);opacity:.72}
 .spread .pg-gutter{fill:url(#gutterGrad)}
 .spread .pg-drop{fill:var(--gold-600);font-family:Fraunces,Georgia,serif;font-weight:700}
 .spread-caption{
@@ -662,14 +691,31 @@ body{
 }
 .spread-caption span:last-child{color:var(--gold-600)}
 
-/* ---------- marquee shelf ---------- */
-.marquee{overflow:hidden;border-block:1px solid var(--line);background:var(--cream-100);padding-block:1.1rem}
+/* ---------- marquee shelf ----------
+   the row names where a book ends up, not who we are in business with,
+   so it carries a visible label rather than reading as a partner bar */
+.marquee{
+  display:flex;align-items:center;gap:1.5rem;
+  overflow:hidden;border-block:1px solid var(--line);background:var(--cream-100);
+  padding-block:1.1rem;padding-inline:clamp(1.2rem,4vw,2.6rem);
+}
+.marquee-label{
+  flex:none;font-family:var(--sans);font-size:.72rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-50);
+  border-right:1px solid var(--line);padding-right:1.5rem;
+}
+.marquee-viewport{flex:1 1 auto;min-width:0;overflow:hidden}
 .marquee-track{display:flex;gap:3.2rem;width:max-content}
 .marquee-item{
   display:flex;align-items:center;gap:.9rem;flex:none;
   font-family:var(--serif);font-size:1rem;color:var(--navy-900);opacity:.7;
 }
 .marquee-item::after{content:"";width:5px;height:5px;background:var(--gold-500);border-radius:50%}
+@media (max-width:700px){
+  .marquee{flex-direction:column;align-items:flex-start;gap:.7rem}
+  .marquee-label{border-right:0;padding-right:0}
+  .marquee-viewport{width:100%}
+}
 
 /* ---------- service cards with illustrations ---------- */
 .svc-illus{width:100%;height:132px;overflow:visible;margin-bottom:.4rem}
@@ -697,7 +743,7 @@ body{
   display:flex;justify-content:space-between;align-items:baseline;
   margin-bottom:1.6rem;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-50);
 }
-.ms-count{font-family:var(--serif);font-size:.95rem;letter-spacing:0;color:var(--gold-600);text-transform:none}
+.ms-count{font-family:var(--serif);font-size:1.01rem;letter-spacing:0;color:var(--gold-600);text-transform:none}
 .ms-count strong{font-size:1.3rem}
 .ms-text{
   font-family:var(--serif);font-size:clamp(1.05rem,.95rem + .7vw,1.5rem);
@@ -776,7 +822,7 @@ body{
 .seg{display:flex;gap:.4rem;flex-wrap:wrap}
 .seg button{
   border:1px solid var(--line);background:transparent;border-radius:100px;
-  padding:.45rem 1rem;font-size:.84rem;color:var(--ink-70);transition:background .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease);
+  padding:.45rem 1rem;font-size:.9rem;color:var(--ink-70);transition:background .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease);
 }
 .seg button[aria-pressed="true"]{background:var(--navy-900);border-color:var(--navy-900);color:var(--cream-50)}
 input[type=range]{
@@ -806,7 +852,7 @@ input[type=range]::-moz-range-thumb{
   padding:1rem 1.2rem;display:grid;gap:.25rem;transition:border-color .35s var(--ease),background .35s var(--ease);
 }
 .styler-tab strong{font-family:var(--serif);font-size:1.05rem;font-weight:600}
-.styler-tab span{font-size:.84rem;color:var(--ink-50)}
+.styler-tab span{font-size:.9rem;color:var(--ink-50)}
 .styler-tab[aria-pressed="true"]{border-color:var(--gold-500);background:var(--white)}
 .styler-tab[aria-pressed="true"] span{color:var(--ink-70)}
 
@@ -833,7 +879,7 @@ input[type=range]::-moz-range-thumb{
 .check-list{list-style:none;margin:1.4rem 0 0;padding:0;display:grid;gap:.2rem}
 .check-list li{border-bottom:1px solid var(--line)}
 .check-list label{
-  display:flex;gap:.9rem;align-items:flex-start;padding:.85rem 0;cursor:pointer;font-size:.94rem;
+  display:flex;gap:.9rem;align-items:flex-start;padding:.85rem 0;cursor:pointer;font-size:1rem;
 }
 .check-list input{
   appearance:none;-webkit-appearance:none;width:20px;height:20px;flex:none;margin-top:.15rem;
@@ -850,14 +896,14 @@ input[type=range]::-moz-range-thumb{
 .check-meter{height:4px;background:var(--cream-100);margin-top:1.6rem;overflow:hidden}
 .check-meter i{display:block;height:100%;width:0;background:var(--gold-500);transition:width .5s var(--ease)}
 .check-verdict{margin-top:1rem;font-family:var(--serif);font-size:var(--step-1)}
-.check-sub{font-size:.9rem;color:var(--ink-70);margin-top:.4rem}
+.check-sub{font-size:.97rem;color:var(--ink-70);margin-top:.4rem}
 
 /* ---------- glossary ---------- */
 .gloss{columns:2;column-gap:clamp(2rem,4vw,3.5rem)}
 .gloss-item{break-inside:avoid;border-bottom:1px solid var(--line);padding-block:1rem}
 .gloss-item dt{font-family:var(--serif);font-size:1.05rem;font-weight:600;display:flex;justify-content:space-between;gap:1rem}
 .gloss-item dt small{font-family:var(--sans);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-600);align-self:center}
-.gloss-item dd{margin:.4rem 0 0;font-size:.9rem;color:var(--ink-70)}
+.gloss-item dd{margin:.4rem 0 0;font-size:.97rem;color:var(--ink-70)}
 
 /* ---------- pull quote ---------- */
 .pull{
@@ -877,16 +923,16 @@ input[type=range]::-moz-range-thumb{
 .numbered{list-style:none;counter-reset:n;margin:1.4rem 0 0;padding:0;display:grid;gap:1.1rem}
 .numbered li{counter-increment:n;display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start}
 .numbered li::before{
-  content:counter(n,decimal-leading-zero);font-family:var(--serif);font-size:.85rem;
+  content:counter(n,decimal-leading-zero);font-family:var(--serif);font-size:.92rem;
   color:var(--gold-600);border:1px solid var(--line-gold);border-radius:50%;
   width:30px;height:30px;display:grid;place-items:center;flex:none;
 }
 .numbered strong{display:block;font-family:var(--serif);font-size:1.05rem;font-weight:600;margin-bottom:.2rem}
-.numbered span{font-size:.92rem;color:var(--ink-70)}
+.numbered span{font-size:.99rem;color:var(--ink-70)}
 
 
 /* ============================================================
-   ICON STROKE — one optical weight across the set.
+   ICON STROKE: one optical weight across the set.
    All icons share a 24-unit viewBox but render at different
    sizes, so a single stroke-width attribute renders at wildly
    different thicknesses. These drive stroke from the rendered
@@ -899,3 +945,67 @@ input[type=range]::-moz-range-thumb{
 .header-phone svg,.socials svg,.pkg li svg{stroke-width:2.4}
 .svc-icon{stroke-width:1.1}
 .spread .pg-folio{font-family:var(--sans);fill:var(--proof-red)}
+
+/* ---------- five-service grid: children's books runs full width ---------- */
+.svc-card--wide{grid-column:1/-1}
+@media (min-width:641px){
+  .svc-card--wide{
+    display:grid;grid-template-columns:190px 1fr;
+    column-gap:clamp(1.5rem,4vw,3rem);row-gap:.6rem;align-content:center;
+  }
+  .svc-card--wide .svc-illus{grid-column:1;grid-row:1/5;align-self:center;height:150px;margin-bottom:0}
+  .svc-card--wide .svc-num,
+  .svc-card--wide h3,
+  .svc-card--wide p,
+  .svc-card--wide .link-arrow{grid-column:2}
+  .svc-card--wide p{max-width:64ch}
+  .svc-card--wide .link-arrow{justify-self:start;margin-top:.5rem}
+}
+.svc-aside{
+  margin-top:1.6rem;font-size:.97rem;color:var(--ink-70);max-width:70ch;
+  padding-left:1rem;border-left:2px solid var(--line-gold);
+}
+
+/* ============================================================
+   SERVICE INTRO BAND: copy beside a photograph, alternating
+   sides down the page. Odd services put the picture right,
+   even services flip it left. Stacks copy-first on mobile.
+   ============================================================ */
+.svc-intro{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(2rem,5vw,4.5rem);align-items:center;
+  margin-bottom:clamp(2.5rem,5vw,4rem);
+}
+.svc-intro-copy .lede{margin-top:1.3rem}
+.svc-intro-copy p + p{margin-top:1.1rem}
+.svc-intro-copy .hero-cta{margin-top:2rem}
+.svc-intro-media{
+  margin:0;border-radius:3px;overflow:hidden;
+  box-shadow:0 26px 60px -32px rgba(11,31,58,.45);
+}
+.svc-intro-media img{display:block;width:100%;height:auto}
+.svc-intro--flip .svc-intro-copy{order:2}
+.svc-intro--flip .svc-intro-media{order:1}
+
+/* detail panels sitting under an intro band */
+.svc-panels{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(1.2rem,3vw,2rem);align-items:start;
+}
+
+@media (max-width:900px){
+  .svc-intro{grid-template-columns:1fr;gap:2rem}
+  .svc-intro--flip .svc-intro-copy,
+  .svc-intro--flip .svc-intro-media{order:0}
+  .svc-panels{grid-template-columns:1fr}
+}
+
+/* ---------- hero quill: draws line one of the draft page ----------
+   Nib and shaft in navy to sit with .pg-draft-line, feather vanes in
+   gold to echo .pg-drop. Hidden until site.js positions it on the
+   path, so with JS off or reduced motion no stray pen appears. */
+.spread .pg-pen{opacity:0}
+.spread .pg-pen-nib{fill:var(--navy-900);stroke:none}
+.spread .pg-pen-shaft{stroke:var(--navy-900);stroke-width:1.6;fill:none;stroke-linecap:round}
+.spread .pg-pen-vane{fill:var(--gold-600);fill-opacity:.5;stroke:var(--gold-600);stroke-width:.9;stroke-linejoin:round}
+.svc-illus .il-nib{fill:var(--navy-900);stroke:none}

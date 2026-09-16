@@ -1,7 +1,7 @@
 var yrEl = document.getElementById('yr');
 if (yrEl) yrEl.textContent = new Date().getFullYear();
 /* ============================================================
-   AUTHOR VENTURE — motion + instruments
+   AUTHOR VENTURE: motion + instruments
    GSAP 3.13 + ScrollTrigger only. Every module is self-guarding:
    if its markup isn't on the page, it does nothing. If GSAP fails
    or motion is reduced, the page stays complete and readable.
@@ -15,7 +15,7 @@ if (yrEl) yrEl.textContent = new Date().getFullYear();
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
   /* ==========================================================
-     1. CHROME — header, drawer, modal, accordion, filters, forms
+     1. CHROME: header, drawer, modal, accordion, filters, forms
      ========================================================== */
   var header = $('.site-header');
   function onScroll() { if (header) header.classList.toggle('is-stuck', window.scrollY > 40); }
@@ -133,7 +133,7 @@ if (yrEl) yrEl.textContent = new Date().getFullYear();
   });
 
   /* ==========================================================
-     2. STAGE SELECTOR — "where is your book right now?"
+     2. STAGE SELECTOR: "where is your book right now?"
      ========================================================== */
   (function stager() {
     var rail = $('.stage-rail');
@@ -144,11 +144,11 @@ if (yrEl) yrEl.textContent = new Date().getFullYear();
     if (!btns.length || !panel) return;
 
     var DATA = [
-      { tag: 'Stage one', h: 'An idea, and nothing on paper', p: 'Nothing is wrong. Most books live here for years. What you need first is a structure &mdash; a shape that proves the idea can carry 60,000 words before you write any of them.', rec: 'Start with ghostwriting, or an outline session', href: 'services.html#ghostwriting' },
+      { tag: 'Stage one', h: 'An idea, and nothing on paper', p: 'Nothing is wrong. Most books live here for years. What you need first is a structure: a shape that proves the idea can carry 60,000 words before you write any of them.', rec: 'Start with ghostwriting, or an outline session', href: 'services.html#ghostwriting' },
       { tag: 'Stage two', h: 'An outline and a few chapters', p: 'The dangerous stage. Chapter four is where most manuscripts stop, usually because the structure underneath was never load-bearing. Fix the architecture now and the rest gets easier rather than harder.', rec: 'Start with developmental editing', href: 'services.html#editing' },
       { tag: 'Stage three', h: 'A messy full draft', p: 'You have done the hard part, because nobody can edit a book that does not exist. What is left is structural: pacing, order, and the two chapters you already suspect are not earning their place.', rec: 'Start with developmental editing', href: 'services.html#editing' },
       { tag: 'Stage four', h: 'A finished manuscript', p: 'Now it is craft rather than construction. A line edit sharpens how it sounds, a copyedit makes it correct, and a proofread catches what layout breaks. Then it can go to production.', rec: 'Start with a line edit, then a copyedit', href: 'services.html#editing' },
-      { tag: 'Stage five', h: 'Edited and ready to publish', p: 'Formatting, cover, ISBN, metadata, distribution. This is where small technical errors cost real money &mdash; a wrong trim size or careless metadata can bury a good book for a year.', rec: 'Start with book publishing', href: 'services.html#publishing' }
+      { tag: 'Stage five', h: 'Edited and ready to publish', p: 'Formatting, cover, ISBN, metadata, distribution. This is where small technical errors cost real money: a wrong trim size or careless metadata can bury a good book for a year.', rec: 'Start with design & formatting, then distribution', href: 'services.html#design' }
     ];
 
     function select(i) {
@@ -169,7 +169,7 @@ if (yrEl) yrEl.textContent = new Date().getFullYear();
   })();
 
   /* ==========================================================
-     3. SPINE WIDTH CALCULATOR — real print-on-demand maths
+     3. SPINE WIDTH CALCULATOR: real print-on-demand maths
      ========================================================== */
   (function spine() {
     var root = $('#calc');
@@ -284,7 +284,7 @@ if (yrEl) yrEl.textContent = new Date().getFullYear();
   })();
 
   /* ==========================================================
-     6. MOTION — everything below requires GSAP
+     6. MOTION: everything below requires GSAP
      ========================================================== */
   if (!hasGSAP || reduced) {
     document.documentElement.classList.add('js-off');
@@ -379,20 +379,112 @@ if (yrEl) yrEl.textContent = new Date().getFullYear();
     /* the draft page writes itself, gets marked up, then resolves into type */
     var draft = $$('.spread .pg-draft-line'), strikes = $$('.spread .pg-strike'),
         marks = $$('.spread .pg-mark'), setLines = $$('.spread .pg-set-line'), drop = $('.spread .pg-drop');
+    var pen = $('.spread .pg-pen');
     if (draft.length) {
       [draft, strikes, marks].forEach(function (group) {
         group.forEach(function (p) {
-          var len = p.getTotalLength ? p.getTotalLength() : 0;
+          /* Round up to a whole unit before setting the pattern. GSAP rounds
+             strokeDashoffset to an integer but leaves strokeDasharray
+             fractional, so a raw getTotalLength() leaves the two unable to
+             cancel, the sub-pixel remainder renders as a visible stub on
+             every line before it has been drawn. Equal integers cancel. */
+          var len = p.getTotalLength ? Math.ceil(p.getTotalLength()) + 1 : 0;
           if (len) gsap.set(p, { strokeDasharray: len, strokeDashoffset: len });
         });
       });
-      tl.from('.spread .pg-paper, .spread .pg-edge', { opacity: 0, duration: 0.6, stagger: 0.05 }, 0.2)
-        .to(draft, { strokeDashoffset: 0, duration: 0.5, stagger: 0.05, ease: 'none' }, 0.45)
-        .to(strikes, { strokeDashoffset: 0, duration: 0.35, stagger: 0.1, ease: 'none' }, '-=0.45')
-        .to(marks, { strokeDashoffset: 0, duration: 0.45, stagger: 0.09, ease: 'none' }, '-=0.3')
-        .from(setLines, { opacity: 0, x: -6, duration: 0.5, stagger: 0.03 }, '-=0.4')
-        .from(drop, { opacity: 0, scale: 0.6, duration: 0.6, ease: 'back.out(1.7)', transformOrigin: '0% 100%' }, '-=0.35')
-        .from('.spread-caption span', { opacity: 0, y: 8, duration: 0.5, stagger: 0.1 }, '-=0.3');
+
+      /* ---- the quill traces line one ------------------------------------
+         Only the first draft line gets a pen. One legible "a hand wrote
+         this" beat reads better than a pen teleporting down eight lines.
+         Lines two to eight keep the plain dashoffset reveal. */
+      var lead = draft[0];
+      var rest = draft.slice(1);
+      var leadLen = (lead && lead.getTotalLength) ? lead.getTotalLength() : 0;
+      var tracing = !!(pen && leadLen && lead.getPointAtLength);
+
+      /* direction of the path at a distance along it, in degrees */
+      function angleAt(at) {
+        var step = Math.min(2, leadLen * 0.05) || 1;
+        var a = lead.getPointAtLength(Math.max(0, at - step));
+        var b = lead.getPointAtLength(Math.min(leadLen, at + step));
+        return Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
+      }
+      /* drop the nib exactly where the ink currently ends */
+      function penAt(at) {
+        var p = lead.getPointAtLength(at);
+        gsap.set(pen, { x: p.x, y: p.y, rotation: angleAt(at) });
+      }
+
+      if (tracing) {
+        /* svgOrigin pins rotation to the SVG's own 0,0, which is where the
+           nib tip is drawn, so x/y place the tip and rotation pivots on it */
+        gsap.set(pen, { svgOrigin: '0 0', opacity: 0 });
+        penAt(0);
+      }
+
+      /* ---- the book opens, right to left ---------------------------------
+         The two leaves are mirror images of each other about the spine, so
+         the left leaf at scaleX -1 lands exactly on top of the right one,
+         a closed book. Sweeping it to +1 passes through 0, edge on, which
+         is the moment that reads as a page turning over. Everything the
+         spread does afterwards is pushed back by OPEN. */
+      /* FLIP is when the board starts to turn; the shut book holds on screen
+         until then so the cover is actually read before it opens. OPEN is
+         where the spread lands flat, and the whole writing sequence hangs
+         off it. */
+      var FLIP = 0.58, TURN = 0.72, OPEN = FLIP + TURN;
+      var leftLeaf = [$('.spread .pg-edge'), $('.spread .pg-paper'), $('.spread .pg-cover')].filter(Boolean);
+      var book = $$('.spread .pg-edge').concat($$('.spread .pg-paper'), $$('.spread .pg-cover'));
+      /* folios would otherwise sit on top of the closed book, since both are
+         painted after the leaves */
+      var folios = $$('.spread .pg-folio').concat($$('.spread .pg-num'));
+
+      /* The board is hidden in CSS so that a no-JS or reduced-motion visitor
+         gets the open spread rather than a blue rectangle over the page.
+         It is only brought in here, where there is an animation to run. */
+      gsap.set(leftLeaf, { svgOrigin: '320 235' });
+      gsap.set('.spread .pg-cover', { opacity: 1 });
+      tl.from(book, { opacity: 0, duration: 0.3, ease: 'none' }, 0.05)
+        .from('.spread .pg-gutter', { opacity: 0, duration: 0.4, ease: 'none' }, OPEN - 0.3)
+        .fromTo(leftLeaf, { scaleX: -1 }, { scaleX: 1, duration: TURN, ease: 'power2.inOut' }, FLIP)
+        /* the ease is symmetric, so edge-on falls on the exact midpoint of
+           the turn, that is where the board gives way to the page */
+        .set('.spread .pg-cover', { opacity: 0 }, FLIP + TURN / 2);
+      if (folios.length) {
+        tl.from(folios, { opacity: 0, duration: 0.45, ease: 'none' }, OPEN - 0.2);
+      }
+
+      if (tracing) {
+        /* a proxy tween walks the same window as the ink, so the nib and the
+           end of the stroke stay locked together without reading tween state */
+        var nib = { at: 0 };
+        tl.to(pen, { opacity: 1, duration: 0.16, ease: 'none' }, OPEN + 0.34)
+          .to(lead, { strokeDashoffset: 0, duration: 0.8, ease: 'none' }, OPEN + 0.45)
+          .to(nib, {
+            at: leadLen, duration: 0.8, ease: 'none',
+            /* only steer the nib while the playhead is still inside the
+               tracing window, a completed tween re-renders on any seek or
+               refresh, and without this it would snatch the parked quill
+               back onto the line */
+            onUpdate: function () { if (tl.time() < OPEN + 1.26) penAt(nib.at); }
+          }, OPEN + 0.45)
+          /* lift off the page, then set the quill down in the top margin */
+          .to(pen, { y: '-=6', duration: 0.15, ease: 'power2.out' }, OPEN + 1.25)
+          .to(pen, { x: 280, y: 82, rotation: 38, duration: 0.55, ease: 'power2.inOut' }, OPEN + 1.40);
+        if (rest.length) {
+          tl.to(rest, { strokeDashoffset: 0, duration: 0.5, stagger: 0.05, ease: 'none' }, OPEN + 1.05);
+        }
+      } else {
+        tl.to(draft, { strokeDashoffset: 0, duration: 0.5, stagger: 0.05, ease: 'none' }, OPEN + 0.45);
+      }
+
+      /* the pen is parked by 1.95, so the red marks land on a clear page */
+      var after = (tracing ? 1.72 : 0.85) + OPEN;
+      tl.to(strikes, { strokeDashoffset: 0, duration: 0.35, stagger: 0.1, ease: 'none' }, after)
+        .to(marks, { strokeDashoffset: 0, duration: 0.45, stagger: 0.09, ease: 'none' }, after + 0.23)
+        .from(setLines, { opacity: 0, x: -6, duration: 0.5, stagger: 0.03 }, after + 0.33)
+        .from(drop, { opacity: 0, scale: 0.6, duration: 0.6, ease: 'back.out(1.7)', transformOrigin: '0% 100%' }, after + 0.58)
+        .from('.spread-caption span', { opacity: 0, y: 8, duration: 0.5, stagger: 0.1 }, after + 0.73);
     }
 
     /* the spread tilts toward the cursor, like a physical object on a desk */
@@ -425,7 +517,7 @@ if (yrEl) yrEl.textContent = new Date().getFullYear();
     var mt = $('.marquee-track');
     if (!mt) return;
     /* clone the row so the loop is seamless, but keep the copy out of the
-       accessibility tree — otherwise every title is announced twice */
+       accessibility tree, otherwise every title is announced twice */
     var clone = mt.cloneNode(true);
     clone.setAttribute('aria-hidden', 'true');
     Array.prototype.forEach.call(clone.children, function (c) { c.setAttribute('aria-hidden', 'true'); });
@@ -442,7 +534,7 @@ if (yrEl) yrEl.textContent = new Date().getFullYear();
   })();
 
   /* ==========================================================
-     7. THE LIVING MANUSCRIPT — signature moment.
+     7. THE LIVING MANUSCRIPT: signature moment.
      A real line edit, performed at the speed you scroll.
      ========================================================== */
   (function manuscript() {
@@ -493,7 +585,7 @@ if (yrEl) yrEl.textContent = new Date().getFullYear();
   })();
 
   /* ==========================================================
-     8. THE GOLD PATH — the logo device as a scroll instrument
+     8. THE GOLD PATH: the logo device as a scroll instrument
      ========================================================== */
   $$('.path-wrap').forEach(function (wrap) {
     var path = $('.path-svg path', wrap);
@@ -523,7 +615,7 @@ if (yrEl) yrEl.textContent = new Date().getFullYear();
   /* --- pinned horizontal shelf --- */
   var track = $('.hpanels-track');
   if (track) {
-    /* matchMedia so the pinned scroll builds and tears down on resize —
+    /* matchMedia so the pinned scroll builds and tears down on resize,
        reading innerWidth once meant widening past 1024 never enabled it */
     ScrollTrigger.matchMedia({
       '(min-width: 1025px)': function () {
